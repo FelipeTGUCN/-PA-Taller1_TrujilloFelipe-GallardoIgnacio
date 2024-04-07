@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skin rose
+hide method
+
+entity Cliente {
+    Rut
+    Nombre completo
+    Correo electronico
+}
+
+entity Empleado {
+    Nombre de usuario
+    Contraseña
+}
+
+entity Videojuego {
+    Codigo
+    Nombre
+    Precio
+    Genero
+    Clasificacion de edades
+    Desarrolladora
+    Plataformas
+}
+
+note "Los empleados se llevaran una comision del 2%\npor cada venta realizada" as N1
+note "En caso de que el cliente sea miembro registrado, se le debe aplicar un descuento" as N2
+
+Empleado "1" --> "0..*" Cliente : "Atiende"
+Cliente "1..*" --> "1::*" Videojuego : "Compra"
+
+Empleado --> N1
+Cliente --> N2
+
+@enduml
