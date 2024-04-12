@@ -1,0 +1,109 @@
+@startuml
+skin rose
+
+class Cliente {
+    - rut: String
+    - nombreCompleto: String
+    - correoElectronico: String
+    - miembro: Boolean
+    + Cliente(rut: String, nombreCompleto: String
+    ,correoElectronico: String, miembro: Boolean)
+    + getRut(): String
+    + getNombreCompleto(): String
+    + getCorreoElectronico(): String
+    + getMiembro(): Boolean
+    + setRut(rut: String): void
+    + setNombreCompleto(nombreCompleto: String): void
+    + setCorreoElectronico(correoElectronico: String): void
+    + setMiembro(miembro: Boolean): void
+}
+
+class ListaClientes {
+    - arregloClientes: Cliente[]
+    - cantidadActualDeClientes: int
+    - cantidadMaximaDeClientes: int
+    + ListaClientes(cantidadMaximaDeClientes: int)
+    + getArregloClientes(): Cliente[]
+    + getCantidadActualDeClientes(): int
+    + buscarCliente(rut: String): Cliente
+    + agregarCliente(nuevoCliente: Cliente): void
+}
+
+
+class Empleado {
+    - nombreDeUsuario: String
+    - contraseña: String
+    + Empleado(nombreDeUsuario: String, contraseña: String)
+    + getNombreDeUsuario(): String
+    + getContraseña(): String
+    + setNombreDeUsuario(nombreDeUsuario: String): void
+    + setContraseña(contraseña: String): void
+
+}
+
+class ListaEmpleados {
+    - arregloEmpleados: Empleado[]
+    - cantidadActualDeEmpleados: int
+    - cantidadMaximaDeEmpleados: int
+    + ListaEmpleados(cantidadMaximaDeEmpleados: int)
+    + getArregloEmpleado(): Empleado[]
+    + getCantidadActualDeEmpleados(): int
+    + buscarEmpleado(nombreDeUsuario: String): Empleado
+    + agregarEmpleado(nuevoEmpleado: Empleado): void
+}
+
+class Videojuego {
+    -codigo: String
+    -nombre: String
+    -precio: int
+    -genero: String
+    -clasificacionDeEdades: String
+    -desarrolladora: String
+    -plataformas: String
+
+    +Videojuego(codigo: String, nombre: String,precio: int,
+    genero: String,clasificacionDeEdades: String,desarrolladora: String,plataformas: String)
+    + getCodigo(): String
+    + getNombre(): String
+    + getPrecio(): String
+    + getGenero(): String
+    + getClasificacionDeEdades(): String
+    + getDesarrolladora(): String
+    + getPlataformas(): String
+    + setCodigo(codigo: String): void
+    + setNombre(nombre: String): void
+    + setPrecio(precio: int): void
+    + setGenero(genero: String): void
+    + setClasificacionDeEdades(ClasificacionDeEdades: String): void
+    + setDesarrolladora(desarrolladora: String): void
+    + setPlataformas(plataformas: String): void
+
+}
+
+class ListaVideojuegos {
+    - arregloVideojuegos: Videojuego[]
+    - cantidadActualDeVideojuegos: int
+    - cantidadMaximaDeVideojuegos: int
+    + ListaVideojuegos(cantidadMaximaDeVideojuegos: int)
+    + getArregloVideojuego(): Videojuego[]
+    + getCantidadActualDeVideojuegos(): int
+    + buscarVideojuegoPorCodigo(codigoVideojuego: String): Videojuego
+    + buscarVideojuegoPorNombre(nombreVideojuego: String): Videojuego
+    + agregarVideojuego(nuevoEmpleado: Empleado): void
+}
+
+
+
+note "Los empleados se llevaran una comision del 2%\npor cada venta realizada" as N1
+note "En caso de que el cliente sea miembro registrado, se le debe aplicar un descuento" as N2
+
+Empleado "1" --> "0..*" Cliente : "Atiende"
+Cliente "1..*" --> "1::*" Videojuego : "Compra"
+ListaClientes "1" o-- "1..*" Cliente: "contiene"
+ListaEmpleados "1" o-- "1..*" Empleado: "contiene"
+ListaVideojuegos "1" o-- "1..*" Videojuego: "contiene"
+
+Empleado --> N1
+Cliente --> N2
+
+@enduml
