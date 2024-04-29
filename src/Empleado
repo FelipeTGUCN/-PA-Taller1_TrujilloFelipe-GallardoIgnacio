@@ -1,0 +1,26 @@
+public class Empleado {
+
+    private String nombreDeUsuario;
+    private String contraseña;
+
+    public Empleado(String nombreDeUsuario, String contraseña) {
+        this.nombreDeUsuario = nombreDeUsuario;
+        this.contraseña = contraseña;
+    }
+
+    public String getNombreDeUsuario() {
+        return nombreDeUsuario;
+    }
+
+    public void setNombreDeUsuario(String nombreDeUsuario) {
+        this.nombreDeUsuario = nombreDeUsuario;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+}
