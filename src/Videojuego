@@ -1,0 +1,78 @@
+public class Videojuego {
+
+    private String codigo;
+    private String nombre;
+    private int precio;
+    private String genero;
+    private String clasificacionDeEdades;
+    private String desarrolladora;
+    private String plataformas;
+
+    public Videojuego(String codigo, String nombre, int precio,
+                      String genero, String clasificacionDeEdades,
+                      String desarrolladora, String plataformas) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.genero = genero;
+        this.clasificacionDeEdades = clasificacionDeEdades;
+        this.desarrolladora = desarrolladora;
+        this.plataformas = plataformas;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getClasificacionDeEdades() {
+        return clasificacionDeEdades;
+    }
+
+    public void setClasificacionDeEdades(String clasificacionDeEdades) {
+        this.clasificacionDeEdades = clasificacionDeEdades;
+    }
+
+    public String getDesarrolladora() {
+        return desarrolladora;
+    }
+
+    public void setDesarrolladora(String desarrolladora) {
+        this.desarrolladora = desarrolladora;
+    }
+
+    public String getPlataformas() {
+        return plataformas;
+    }
+
+    public void setPlataformas(String plataformas) {
+        this.plataformas = plataformas;
+    }
+}
