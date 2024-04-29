@@ -1,0 +1,85 @@
+public class ListaClientes {
+
+    private Cliente[] arregloClientes;
+    private int cantidadActual;
+    private int cantidadMax;
+
+    public ListaClientes(int cantidadMax) {
+
+        if (cantidadMax < 0){
+            throw new IllegalArgumentException("Valor para la lista inválido.");
+        }
+
+        this.arregloClientes = new Cliente[this.cantidadMax];
+        this.cantidadActual = 0;
+        this.cantidadMax = cantidadMax;
+    }
+
+    public int buscarCliente(String rut){
+
+        for (int i = 0; i < this.cantidadActual; i++) {
+            if (this.arregloClientes[i].getRut().equals(rut)){
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public boolean agregarCliente(Cliente cliente){
+
+        // Validación en el caso de que la cantidad de productos sea igual a la cantidad máxima.
+        if (this.cantidadActual == this.cantidadMax){
+            return false;
+        }
+
+        // Validación en el caso de que la cantidad de productos sea igual a 0 o si la lista está vacía.
+        if (this.cantidadActual == 0){
+            this.arregloClientes[this.cantidadActual] = cliente;
+            this.cantidadActual++;
+            return true;
+        }
+
+        // Validación en el caso de que el producto ya exista en la lista.
+        if (this.buscarCliente(cliente.getRut()) != -1){
+            return false;
+        }
+
+        // Agrega el producto a la lista.
+        this.arregloClientes[this.cantidadActual] = cliente;
+        this.cantidadActual++;
+        return true;
+    }
+
+    public boolean agregarCliente(String rut, String nombreCompleto,
+                                  String correoElectronico, Boolean miembro) {
+        Cliente cliente = new Cliente(rut,nombreCompleto,correoElectronico,miembro);
+
+        return this.agregarCliente(cliente);
+    }
+
+
+    public Cliente[] getArregloClientes() {
+        return arregloClientes;
+    }
+
+    public void setArregloClientes(Cliente[] arregloClientes) {
+        this.arregloClientes = arregloClientes;
+    }
+
+    public int getCantidadActual() {
+        return cantidadActual;
+    }
+
+    public void setCantidadActual(int cantidadActual) {
+        this.cantidadActual = cantidadActual;
+    }
+
+    public int getCantidadMax() {
+        return cantidadMax;
+    }
+
+    public void setCantidadMax(int cantidadMax) {
+        this.cantidadMax = cantidadMax;
+    }
+}
