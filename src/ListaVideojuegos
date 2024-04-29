@@ -1,0 +1,124 @@
+public class ListaVideojuegos {
+
+    private Videojuego[] arregloVideojuegos;
+    private int cantidadActual;
+    private int cantidadMax;
+
+    public ListaVideojuegos(int cantidadMax) {
+
+        if (cantidadMax < 0){
+            throw new IllegalArgumentException("Valor para la lista inválido.");
+        }
+
+        this.cantidadMax = cantidadMax;
+        this.arregloVideojuegos = new Videojuego[this.cantidadMax];
+        this.cantidadActual = 0;
+    }
+
+
+    public int buscarVideojuegoPorNombre(String nombre){
+
+        for (int i = 0; i < this.cantidadActual; i++) {
+            if (this.arregloVideojuegos[i].getNombre().equals(nombre)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int buscarVideojuegoPorCodigo(String codigo){
+
+        for (int i = 0; i < this.cantidadActual; i++) {
+            if (this.arregloVideojuegos[i].getCodigo().equals(codigo)){
+                return i;
+            }
+        }
+        StdOut.println("videojuego no encontrado");
+        return -1;
+    }
+
+    public boolean agregarVideojuego(Videojuego videojuego){
+
+        // Validación en el caso de que la cantidad de productos sea igual a la cantidad máxima.
+        if (this.cantidadActual == this.cantidadMax){
+            return false;
+        }
+
+        // Validación en el caso de que la cantidad de productos sea igual a 0 o si la lista está vacía.
+        if (this.cantidadActual == 0){
+            this.arregloVideojuegos[this.cantidadActual] = videojuego;
+            this.cantidadActual++;
+            return true;
+        }
+
+        // Validación en el caso de que el producto ya exista en la lista.
+        if (this.buscarVideojuegoPorNombre(videojuego.getNombre()) != -1){
+            return false;
+        } else if (this.buscarVideojuegoPorCodigo(videojuego.getCodigo()) != -1) {
+            return false;
+        }
+
+        // Agrega el producto a la lista.
+        this.arregloVideojuegos[this.cantidadActual] = videojuego;
+        this.cantidadActual++;
+        return true;
+    }
+
+    public boolean agregarVideojuego(String codigo, String nombre, int precio, String
+                                     genero, String clasificacionDeEdades, String
+                                     desarrolladora, String plataformas) {
+        Videojuego videojuego = new Videojuego(codigo,nombre, precio, genero,clasificacionDeEdades
+                                        ,desarrolladora,plataformas);
+
+        return this.agregarVideojuego(videojuego);
+    }
+
+    public void lecturaDeArchivo(String nombreArchivo) {
+        Videojuego nuevoVideojuego;
+
+        In archivoDeEntrada = new In(nombreArchivo);
+
+        while (!archivoDeEntrada.isEmpty()) {
+            String[] linea = archivoDeEntrada.readLine().split(",");
+
+            String codigo = linea[0];
+            String nombre = linea[1];
+            int precio = Integer.parseInt(linea[2]);
+            String genero = linea[3];
+            String clasificacionDeEdades = linea[4];
+            String desarrolladora = linea[5];
+            String plataformas = linea[6];
+
+            nuevoVideojuego = new Videojuego(codigo,nombre,precio,genero,clasificacionDeEdades,
+                    desarrolladora, plataformas);
+
+            agregarVideojuego(nuevoVideojuego);
+            StdOut.println("Se ha agregado el Videojuego " + nuevoVideojuego.getNombre());
+        }
+        archivoDeEntrada.close();
+    }
+
+    public Videojuego[] getArregloVideojuegos() {
+        return arregloVideojuegos;
+    }
+
+    public void setArregloVideojuegos(Videojuego[] arregloVideojuegos) {
+        this.arregloVideojuegos = arregloVideojuegos;
+    }
+
+    public int getCantidadActual() {
+        return cantidadActual;
+    }
+
+    public void setCantidadActual(int cantidadActual) {
+        this.cantidadActual = cantidadActual;
+    }
+
+    public int getCantidadMax() {
+        return cantidadMax;
+    }
+
+    public void setCantidadMax(int cantidadMax) {
+        this.cantidadMax = cantidadMax;
+    }
+}
