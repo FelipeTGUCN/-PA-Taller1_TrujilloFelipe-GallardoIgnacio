@@ -1,0 +1,110 @@
+public class ListaEmpleados {
+
+    private Empleado[] arregloEmpleados;
+    private int cantidadActual;
+    private int cantidadMax;
+
+    public ListaEmpleados(int cantidadMax) {
+
+        if (cantidadMax < 0){
+            throw new IllegalArgumentException("Valor para la lista inválido.");
+        }
+
+        this.cantidadMax = cantidadMax;
+        this.arregloEmpleados = new Empleado[this.cantidadMax];
+        this.cantidadActual = 0;
+    }
+
+
+
+    //Se busca un empleado por su nombre de usuario
+   // public Empleado buscarEmpleado(String nombreDeUsuario) {
+
+
+
+
+    public int buscarEmpleado(String nombreDeUsuario){
+        for (int i = 0; i < this.cantidadActual; i++) {
+            if (this.arregloEmpleados[i].getNombreDeUsuario().equalsIgnoreCase(nombreDeUsuario)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public boolean agregarEmpleado(Empleado empleado){
+
+        // Validación en el caso de que la cantidad de productos sea igual a la cantidad máxima.
+        if (this.cantidadActual == this.cantidadMax){
+            return false;
+        }
+
+        // Validación en el caso de que la cantidad de productos sea igual a 0 o si la lista está vacía.
+        if (this.cantidadActual == 0){
+            this.arregloEmpleados[this.cantidadActual] = empleado;
+            this.cantidadActual++;
+            return true;
+        }
+
+        // Validación en el caso de que el producto ya exista en la lista.
+        if (this.buscarEmpleado(empleado.getNombreDeUsuario()) != -1){
+            return false;
+        }
+
+        // Agrega el producto a la lista.
+        this.arregloEmpleados[this.cantidadActual] = empleado;
+        this.cantidadActual++;
+        return true;
+    }
+
+    public boolean agregarEmpleado(String nombreDeUsuario, String contrasenia) {
+        Empleado empleado = new Empleado(nombreDeUsuario, contrasenia);
+        return this.agregarEmpleado(empleado);
+    }
+
+    public void lecturaDeArchivo(String nombreArchivo) {
+        Empleado nuevoEmpleado;
+
+        In archivoDeEntrada = new In(nombreArchivo);
+
+        while (!archivoDeEntrada.isEmpty()) {
+            String[] linea = archivoDeEntrada.readLine().split(",");
+
+            String nombreDeUsuario = linea[0];
+            String contrasenia = linea[1];
+
+            nuevoEmpleado = new Empleado(nombreDeUsuario, contrasenia);
+
+            agregarEmpleado(nuevoEmpleado);
+                StdOut.println("Se ha agregado el empleado " + nuevoEmpleado.getNombreDeUsuario());
+            }
+
+        archivoDeEntrada.close();
+    }
+
+
+
+    public Empleado[] getArregloEmpleados() {
+        return arregloEmpleados;
+    }
+
+    public void setArregloEmpleados(Empleado[] arregloEmpleados) {
+        this.arregloEmpleados = arregloEmpleados;
+    }
+
+    public int getCantidadActual() {
+        return cantidadActual;
+    }
+
+    public void setCantidadActual(int cantidadActual) {
+        this.cantidadActual = cantidadActual;
+    }
+
+    public int getCantidadMax() {
+        return cantidadMax;
+    }
+
+    public void setCantidadMax(int cantidadMax) {
+        this.cantidadMax = cantidadMax;
+    }
+}
