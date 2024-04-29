@@ -1,0 +1,47 @@
+public class Cliente {
+
+    private String rut;
+    private String nombreCompleto;
+    private String correoElectronico;
+    private Boolean miembro;
+
+    public Cliente(String rut, String nombreCompleto,
+                   String correoElectronico, Boolean miembro) {
+        this.rut = rut;
+        this.nombreCompleto = nombreCompleto;
+        this.correoElectronico = correoElectronico;
+        this.miembro = miembro;
+    }
+
+    public String getRut() {
+        return rut;
+    }
+
+    public void setRut(String rut) {
+        this.rut = rut;
+    }
+
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
+    }
+
+    public String getCorreoElectronico() {
+        return correoElectronico;
+    }
+
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
+    }
+
+    public Boolean getMiembro() {
+        return miembro;
+    }
+
+    public void setMiembro(Boolean miembro) {
+        this.miembro = miembro;
+    }
+}
